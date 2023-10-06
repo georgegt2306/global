@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>CRUD de Datos Personales</title>
+</h:head>
+<h:body>
+    <h1>Lista de Personas</h1>
+
+    <h:form>
+        <!-- Campos para agregar/editar una persona -->
+        <h:inputHidden id="personaId" value="#{personaController.personaSeleccionada.id}" />
+
+        <h:outputLabel for="nombre" value="Nombre: " />
+        <h:inputText id="nombre" value="#{personaController.personaSeleccionada.firstName}" placeholder="Nombre" />
+        <br />
+        <!-- Apellido -->
+        <h:outputLabel for="apellido" value="Apellido: " />
+        <h:inputText id="apellido" value="#{personaController.personaSeleccionada.lastName}" placeholder="Apellido" />
+        <br />
+        <!-- Edad -->
+        <h:outputLabel for="edad" value="Edad: " />
+        <h:inputText id="edad" value="#{personaController.personaSeleccionada.age}" placeholder="Edad" />
+        <br />
+        <!-- Dirección -->
+        <h:outputLabel for="direccion" value="Dirección: " />
+        <h:inputText id="direccion" value="#{personaController.personaSeleccionada.address}" placeholder="Dirección" />
+        <br />
+        <!-- Email -->
+        <h:outputLabel for="email" value="Email: " />
+        <h:inputText id="email" value="#{personaController.personaSeleccionada.email}" placeholder="Email" />
+        <br />
+        <!-- Fecha de Nacimiento -->
+        <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento: " />
+        <h:inputText id="fechaNacimiento" value="#{personaController.personaSeleccionada.birthDate}" placeholder="Fecha de nacimiento" />
+        <br />
+        <!-- Teléfono -->
+        <h:outputLabel for="telefono" value="Teléfono: " />
+        <h:inputText id="telefono" value="#{personaController.personaSeleccionada.phone}" placeholder="Teléfono" />
+        <br />
+        <!-- Estado -->
+        <h:outputLabel for="estado" value="Estado: " />
+        <h:inputText id="estado" value="#{personaController.personaSeleccionada.estate}" placeholder="Estado" />
+        <br />
+
+        <!-- Agregar/Actualizar/Eliminar botones -->
+        <h:commandButton value="Agregar" action="#{personaController.agregarPersona}" />
+    </h:form>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Dirección</th>
+            <th>Email</th>
+            <th>Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Itera sobre la lista de personas y muestra los detalles -->
+        <ui:repeat value="#{personaController.personas}" var="persona">
+            <tr>
+                <td>#{persona.firstName}</td>
+                <td>#{persona.lastName}</td>
+                <td>#{persona.age}</td>
+                <td>#{persona.address}</td>
+                <td>#{persona.email}</td>
+                <td>#{persona.estate}</td>
+
+                <td>
+                    <h:form>
+                        <h:commandButton value="Editar" action="#{personaController.editarPersona(persona)}" />
+                        <h:commandButton value="Eliminar" action="#{personaController.eliminarPersona(persona)}" />
+                    </h:form>
+                </td>
+            </tr>
+        </ui:repeat>
+        </tbody>
+    </table>
+    <p:messages autoUpdate="true" />
+</h:body>
+</html>
